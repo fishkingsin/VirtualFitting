@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- this is template
+<PAGE name=(string)"page name">
+	<BACKGROUND>
+		<IMAGES>
+			<FILE>(string)path_to_image_file(swf / png / jpg)</FILE>
+		</IMAGES>
+	</BACKGROUND>
+	<BUTTON name=(string)"name of the button">
+		<SKIP_VIDEO>int(0 – keep playing ,1-skip playing )(skip the paused previous video)</SKIP_VIDEO>
+		<SHOW_LABLE>(0,1)1- enable show caption 0-disable</SHOW_LABLE>
+		<X>(number)coordinate x</X><Y>(number)coordinate y</Y>
+		<IMAGES>
+			<FILE>(string)path_to_image_file button up</FILE>
+			<FILE>(string)path_to_image_file button clicked</FILE>
+			</IMAGES>
+		<IMAGES>
+			<FILE>(string)path_to_image_file button toggled</FILE>
+		</IMAGES>
+		<CAPTION>
+			<CHIT>(string) caption on button</CHIT>
+		</CAPTION>
+		<NEXT_PAGE>(string)next page name</NEXT_PAGE>
+	</BUTTON>
+</PAGE>-->
+<ALL_PAGES>
+	<PAGE name="p0">
+		<BACKGROUND>
+			<IMAGES>
+				<FILE>./data/images/1_TWP_gameUI_0626_landingpage.jpg</FILE>
+			</IMAGES>
+		</BACKGROUND>
+		<BUTTON name="p0_btn_1">
+			<SHOW_LABLE>0</SHOW_LABLE><X>476</X><Y>767</Y>
+			<IMAGES>
+				<FILE>./data/images/start_btn.png</FILE>
+				<FILE>./data/images/start_btn.png</FILE>
+			</IMAGES>
+			<CAPTION>
+				<CHIT>undefined</CHIT>
+			</CAPTION>
+			<FILES>
+				<CHIT/>
+			</FILES>
+			<NEXT_PAGE>p1</NEXT_PAGE>
+			<MESSAGE></MESSAGE>
+		</BUTTON>
+	</PAGE>
+	<PAGE name="p1">
+		<BACKGROUND>
+			<IMAGES>
+				<FILE>./data/images/2_TWP_gameUI_0626_in_1.jpg</FILE>
+			</IMAGES>
+		</BACKGROUND>
+		<BUTTON name=" p1_btn_next">
+			<SKIP_VIDEO>1</SKIP_VIDEO>
+			<SHOW_LABLE>0</SHOW_LABLE><X>1060</X><Y>716</Y>
+			<IMAGES>
+				<FILE>./data/images/btn_next.png</FILE>
+				<FILE>./data/images/btn_next.png</FILE>
+			</IMAGES>
+			<CAPTION>
+				<CHI>undefined</CHI>
+			</CAPTION>
+			<NEXT_PAGE>p2</NEXT_PAGE>
+			<MESSAGE>B</MESSAGE>
+		</BUTTON>
+<BUTTON name="p1_btn_back">
+			<SKIP_VIDEO>1</SKIP_VIDEO>
+			<SHOW_LABLE>0</SHOW_LABLE><X>49</X><Y>716</Y>
+			<IMAGES>
+				<FILE>./data/images/1_thumb.png</FILE>
+				<FILE>./data/images/1_thumb.png</FILE>
+			</IMAGES>
+			<CAPTION>
+				<CHI>undefined</CHI>
+			</CAPTION>
+			<NEXT_PAGE>p0</NEXT_PAGE>
+			<MESSAGE>B</MESSAGE>
+		</BUTTON>
+	</PAGE>
+	<PAGE name="p2">
+		<BACKGROUND>
+			<IMAGES>
+				<FILE>./data/images/3_TWP_gameUI_0626_in_2.jpg</FILE>
+			</IMAGES>
+		</BACKGROUND>
+		<BUTTON name=" p2_btn_next">
+			<SKIP_VIDEO>1</SKIP_VIDEO>
+			<SHOW_LABLE>0</SHOW_LABLE><X>1060</X><Y>716</Y>
+			<IMAGES>
+				<FILE>./data/images/btn_next.png</FILE>
+				<FILE>./data/images/btn_next.png</FILE>
+			</IMAGES>
+			<CAPTION>
+				<CHI>undefined</CHI>
+			</CAPTION>
+			<NEXT_PAGE>p3</NEXT_PAGE>
+			<MESSAGE>B</MESSAGE>
+		</BUTTON>
+ 		<BUTTON name="p2_btn_back">
+			<SKIP_VIDEO>1</SKIP_VIDEO>
+			<SHOW_LABLE>0</SHOW_LABLE><X>49</X><Y>716</Y>
+			<IMAGES>
+				<FILE>./data/images/btn_back.png</FILE>
+				<FILE>./data/images/btn_back.png</FILE>
+			</IMAGES>
+			<CAPTION>
+				<CHI>undefined</CHI>
+			</CAPTION>
+			<NEXT_PAGE>p1</NEXT_PAGE>
+			<MESSAGE>B</MESSAGE>
+		</BUTTON>
+	</PAGE>
+	<PAGE name="p3">
+		<BACKGROUND>
+			<IMAGES>
+				<FILE>./data/images/4_TWP_gameUI_0626_in_3.jpg</FILE>
+			</IMAGES>
+		</BACKGROUND>
+		<BUTTON name=" p3_btn_next">
+			<SKIP_VIDEO>1</SKIP_VIDEO>
+			<SHOW_LABLE>0</SHOW_LABLE><X>1060</X><Y>716</Y>
+			<IMAGES>
+				<FILE>./data/images/btn_next.png</FILE>
+				<FILE>./data/images/btn_next.png</FILE>
+			</IMAGES>
+			<CAPTION>
+				<CHI>undefined</CHI>
+			</CAPTION>
+			<NEXT_PAGE>p4</NEXT_PAGE>
+			<MESSAGE>B</MESSAGE>
+		</BUTTON>
+ 		<BUTTON name="p3_btn_back">
+			<SKIP_VIDEO>1</SKIP_VIDEO>
+			<SHOW_LABLE>0</SHOW_LABLE><X>49</X><Y>716</Y>
+			<IMAGES>
+				<FILE>./data/images/btn_back.png</FILE>
+				<FILE>./data/images/btn_back.png</FILE>
+			</IMAGES>
+			<CAPTION>
+				<CHI>undefined</CHI>
+			</CAPTION>
+			<NEXT_PAGE>p4</NEXT_PAGE>
+			<MESSAGE>B</MESSAGE>
+		</BUTTON>
+	</PAGE>
+	<PAGE name="p4">
+		<BACKGROUND>
+			<IMAGES>
+				<FILE>./data/images/5_TWP_gameUI_0626_in_4.jpg</FILE>
+			</IMAGES>
+		</BACKGROUND>
+ 		<BUTTON name="p4_btn_back">
+			<SKIP_VIDEO>1</SKIP_VIDEO>
+			<SHOW_LABLE>0</SHOW_LABLE><X>49</X><Y>716</Y>
+			<IMAGES>
+				<FILE>./data/images/btn_back.png</FILE>
+				<FILE>./data/images/btn_back.png</FILE>
+			</IMAGES>
+			<CAPTION>
+				<CHI>undefined</CHI>
+			</CAPTION>
+			<NEXT_PAGE>p3</NEXT_PAGE>
+			<MESSAGE>B</MESSAGE>
+		</BUTTON>
+		<BUTTON name="p4_btn_next">
+			<SKIP_VIDEO>1</SKIP_VIDEO>
+			<SHOW_LABLE>0</SHOW_LABLE><X>461</X><Y>1125</Y>
+			<IMAGES>
+				<FILE>./data/images/start_btn.png</FILE>
+				<FILE>./data/images/start_btn.png</FILE>
+			</IMAGES>
+			<CAPTION>
+				<CHI>undefined</CHI>
+			</CAPTION>
+			<NEXT_PAGE>p5</NEXT_PAGE>
+			<MESSAGE>B</MESSAGE>
+		</BUTTON>
+	</PAGE>
+	<PAGE name="p5">
+		<BACKGROUND>
+			<IMAGES>
+				<FILE>./solution.swf</FILE>
+			</IMAGES>
+		</BACKGROUND>
+		<BUTTON name="solution_btn_back">
+			<SKIP_VIDEO>1</SKIP_VIDEO>
+			<SHOW_LABLE>0</SHOW_LABLE><X>49</X><Y>716</Y>
+			<IMAGES>
+				<FILE>./data/images/1_thumb.png</FILE>
+				<FILE>./data/images/1_thumb.png</FILE>
+			</IMAGES>
+			<CAPTION>
+				<CHI>undefined</CHI>
+			</CAPTION>
+			<NEXT_PAGE>p0</NEXT_PAGE>
+			<MESSAGE>B</MESSAGE>
+		</BUTTON>
+ 		
+	</PAGE>
+	<PAGE name="gamecore">
+		<BACKGROUND>
+			<IMAGES>
+				<FILE>./capture.swf</FILE>
+			</IMAGES>
+		</BACKGROUND>
+		<BUTTON name="gamcore_btn_back">
+			<SKIP_VIDEO>1</SKIP_VIDEO>
+			<SHOW_LABLE>0</SHOW_LABLE><X>49</X><Y>716</Y>
+			<IMAGES>
+				<FILE>./data/images/1_thumb.png</FILE>
+				<FILE>./data/images/1_thumb.png</FILE>
+			</IMAGES>
+			<CAPTION>
+				<CHI>undefined</CHI>
+			</CAPTION>
+			<NEXT_PAGE>p0</NEXT_PAGE>
+			<MESSAGE>B</MESSAGE>
+		</BUTTON>
+ 		
+	</PAGE>
+	
+</ALL_PAGES>

@@ -1,0 +1,1 @@
+debugMode=false&alwaysOnTop=true&startX=0&startY=0&startW=1280&startH=720&hideMouse=false&FullScreen=true&cameraid=0&camerawidth=1280&cameraheight=720&cameraframerate=30&stagewidth=1080&stageheight=1920

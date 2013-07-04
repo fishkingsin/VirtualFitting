@@ -1,0 +1,18 @@
+<XML>
+  <IP>127.0.0.1</IP>
+  <PORT>2838</PORT>
+  <IDLE>300</IDLE>
+  <SCREENSAVER>./data/movies/screensaver.mp4</SCREENSAVER>
+  <LOGGER>
+    <X>100</X>
+    <Y>0</Y>
+  </LOGGER>
+  <debugMode>true</debugMode>
+  <alwaysOnTop>false</alwaysOnTop>
+  <FullScreen>false</FullScreen>
+  <hideMouse>false</hideMouse>
+  <startX>0</startX>
+  <startY>25</startY>
+  <startW>720</startW>
+  <startH>1280</startH>
+</XML>
