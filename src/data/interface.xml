@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- this is template
 <PAGE name=(string)"page name">
 	<BACKGROUND>
@@ -24,14 +24,14 @@
 	</BUTTON>
 </PAGE>-->
 <ALL_PAGES>
-	<PAGE name="p0">
+	<PAGE name="index">
 		<BACKGROUND>
 			<IMAGES>
-				<FILE>./data/images/1_TWP_gameUI_0626_landingpage.jpg</FILE>
+				<FILE>./landing.swf</FILE>
 			</IMAGES>
 		</BACKGROUND>
-		<BUTTON name="p0_btn_1">
-			<SHOW_LABLE>0</SHOW_LABLE><X>476</X><Y>767</Y>
+		<BUTTON name="index_btn_1">
+			<SHOW_LABLE>0</SHOW_LABLE><X>284</X><Y>590</Y>
 			<IMAGES>
 				<FILE>./data/images/start_btn.png</FILE>
 				<FILE>./data/images/start_btn.png</FILE>
@@ -42,19 +42,19 @@
 			<FILES>
 				<CHIT/>
 			</FILES>
-			<NEXT_PAGE>p1</NEXT_PAGE>
+			<NEXT_PAGE>instruction</NEXT_PAGE>
 			<MESSAGE></MESSAGE>
 		</BUTTON>
 	</PAGE>
-	<PAGE name="p1">
+	<PAGE name="instruction">
 		<BACKGROUND>
 			<IMAGES>
-				<FILE>./data/images/2_TWP_gameUI_0626_in_1.jpg</FILE>
+				<FILE>./instruction.swf</FILE>
 			</IMAGES>
 		</BACKGROUND>
-		<BUTTON name=" p1_btn_next">
+		<!-- <BUTTON name=" p1_btn_next">
 			<SKIP_VIDEO>1</SKIP_VIDEO>
-			<SHOW_LABLE>0</SHOW_LABLE><X>1060</X><Y>716</Y>
+			<SHOW_LABLE>0</SHOW_LABLE><X>638</X><Y>449</Y>
 			<IMAGES>
 				<FILE>./data/images/btn_next.png</FILE>
 				<FILE>./data/images/btn_next.png</FILE>
@@ -65,21 +65,21 @@
 			<NEXT_PAGE>p2</NEXT_PAGE>
 			<MESSAGE>B</MESSAGE>
 		</BUTTON>
-<BUTTON name="p1_btn_back">
+		<BUTTON name="p1_btn_back">
 			<SKIP_VIDEO>1</SKIP_VIDEO>
-			<SHOW_LABLE>0</SHOW_LABLE><X>49</X><Y>716</Y>
+			<SHOW_LABLE>0</SHOW_LABLE><X>30</X><Y>449</Y>
 			<IMAGES>
-				<FILE>./data/images/1_thumb.png</FILE>
-				<FILE>./data/images/1_thumb.png</FILE>
+				<FILE>./data/images/btn_back.png</FILE>
+				<FILE>./data/images/btn_back.png</FILE>
 			</IMAGES>
 			<CAPTION>
 				<CHI>undefined</CHI>
 			</CAPTION>
-			<NEXT_PAGE>p0</NEXT_PAGE>
+			<NEXT_PAGE>p5</NEXT_PAGE>
 			<MESSAGE>B</MESSAGE>
-		</BUTTON>
+		</BUTTON> -->
 	</PAGE>
-	<PAGE name="p2">
+	<!-- <PAGE name="p2">
 		<BACKGROUND>
 			<IMAGES>
 				<FILE>./data/images/3_TWP_gameUI_0626_in_2.jpg</FILE>
@@ -87,7 +87,7 @@
 		</BACKGROUND>
 		<BUTTON name=" p2_btn_next">
 			<SKIP_VIDEO>1</SKIP_VIDEO>
-			<SHOW_LABLE>0</SHOW_LABLE><X>1060</X><Y>716</Y>
+			<SHOW_LABLE>0</SHOW_LABLE><X>638</X><Y>449</Y>
 			<IMAGES>
 				<FILE>./data/images/btn_next.png</FILE>
 				<FILE>./data/images/btn_next.png</FILE>
@@ -100,7 +100,7 @@
 		</BUTTON>
  		<BUTTON name="p2_btn_back">
 			<SKIP_VIDEO>1</SKIP_VIDEO>
-			<SHOW_LABLE>0</SHOW_LABLE><X>49</X><Y>716</Y>
+			<SHOW_LABLE>0</SHOW_LABLE><X>30</X><Y>449</Y>
 			<IMAGES>
 				<FILE>./data/images/btn_back.png</FILE>
 				<FILE>./data/images/btn_back.png</FILE>
@@ -120,7 +120,7 @@
 		</BACKGROUND>
 		<BUTTON name=" p3_btn_next">
 			<SKIP_VIDEO>1</SKIP_VIDEO>
-			<SHOW_LABLE>0</SHOW_LABLE><X>1060</X><Y>716</Y>
+			<SHOW_LABLE>0</SHOW_LABLE><X>638</X><Y>449</Y>
 			<IMAGES>
 				<FILE>./data/images/btn_next.png</FILE>
 				<FILE>./data/images/btn_next.png</FILE>
@@ -133,7 +133,7 @@
 		</BUTTON>
  		<BUTTON name="p3_btn_back">
 			<SKIP_VIDEO>1</SKIP_VIDEO>
-			<SHOW_LABLE>0</SHOW_LABLE><X>49</X><Y>716</Y>
+			<SHOW_LABLE>0</SHOW_LABLE><X>30</X><Y>449</Y>
 			<IMAGES>
 				<FILE>./data/images/btn_back.png</FILE>
 				<FILE>./data/images/btn_back.png</FILE>
@@ -153,7 +153,7 @@
 		</BACKGROUND>
  		<BUTTON name="p4_btn_back">
 			<SKIP_VIDEO>1</SKIP_VIDEO>
-			<SHOW_LABLE>0</SHOW_LABLE><X>49</X><Y>716</Y>
+			<SHOW_LABLE>0</SHOW_LABLE><X>30</X><Y>449</Y>
 			<IMAGES>
 				<FILE>./data/images/btn_back.png</FILE>
 				<FILE>./data/images/btn_back.png</FILE>
@@ -166,7 +166,7 @@
 		</BUTTON>
 		<BUTTON name="p4_btn_next">
 			<SKIP_VIDEO>1</SKIP_VIDEO>
-			<SHOW_LABLE>0</SHOW_LABLE><X>461</X><Y>1125</Y>
+			<SHOW_LABLE>0</SHOW_LABLE><X>284</X><Y>699</Y>
 			<IMAGES>
 				<FILE>./data/images/start_btn.png</FILE>
 				<FILE>./data/images/start_btn.png</FILE>
@@ -177,16 +177,16 @@
 			<NEXT_PAGE>p5</NEXT_PAGE>
 			<MESSAGE>B</MESSAGE>
 		</BUTTON>
-	</PAGE>
-	<PAGE name="p5">
+	</PAGE> -->
+	<PAGE name="solution">
 		<BACKGROUND>
 			<IMAGES>
 				<FILE>./solution.swf</FILE>
 			</IMAGES>
 		</BACKGROUND>
-		<BUTTON name="solution_btn_back">
+		<!-- <BUTTON name="solution_btn_back">
 			<SKIP_VIDEO>1</SKIP_VIDEO>
-			<SHOW_LABLE>0</SHOW_LABLE><X>49</X><Y>716</Y>
+			<SHOW_LABLE>0</SHOW_LABLE><X>30</X><Y>499</Y>
 			<IMAGES>
 				<FILE>./data/images/1_thumb.png</FILE>
 				<FILE>./data/images/1_thumb.png</FILE>
@@ -194,20 +194,21 @@
 			<CAPTION>
 				<CHI>undefined</CHI>
 			</CAPTION>
-			<NEXT_PAGE>p0</NEXT_PAGE>
+			<NEXT_PAGE>index</NEXT_PAGE>
 			<MESSAGE>B</MESSAGE>
-		</BUTTON>
+		</BUTTON> -->
  		
 	</PAGE>
 	<PAGE name="gamecore">
 		<BACKGROUND>
 			<IMAGES>
-				<FILE>./capture.swf</FILE>
+				<FILE>./gamecore.swf</FILE>
+				
 			</IMAGES>
 		</BACKGROUND>
-		<BUTTON name="gamcore_btn_back">
+		<!-- <BUTTON name="gamcore_btn_back">
 			<SKIP_VIDEO>1</SKIP_VIDEO>
-			<SHOW_LABLE>0</SHOW_LABLE><X>49</X><Y>716</Y>
+			<SHOW_LABLE>0</SHOW_LABLE><X>30</X><Y>499</Y>
 			<IMAGES>
 				<FILE>./data/images/1_thumb.png</FILE>
 				<FILE>./data/images/1_thumb.png</FILE>
@@ -215,10 +216,49 @@
 			<CAPTION>
 				<CHI>undefined</CHI>
 			</CAPTION>
-			<NEXT_PAGE>p0</NEXT_PAGE>
+			<NEXT_PAGE>index</NEXT_PAGE>
+			<MESSAGE>B</MESSAGE>
+		</BUTTON> -->
+ 		
+	</PAGE>
+	<PAGE name="selectcover">
+		<BACKGROUND>
+			<IMAGES>
+				<FILE>./selectcover.swf</FILE>
+				
+			</IMAGES>
+		</BACKGROUND>
+	</PAGE>
+	<PAGE name="selectcover">
+		<BACKGROUND>
+			<IMAGES>
+				<FILE>./selectcover.swf</FILE>
+				
+			</IMAGES>
+		</BACKGROUND>
+	</PAGE>
+	<PAGE name="postfacebook">
+		<BACKGROUND>
+			<IMAGES>
+				<FILE>./postfacebook.swf</FILE>
+				
+			</IMAGES>
+		</BACKGROUND>
+		<!-- 292 624 -->
+		<BUTTON name="postfacebook_btn_back">
+			<SKIP_VIDEO>1</SKIP_VIDEO>
+			
+			<SHOW_LABLE>0</SHOW_LABLE><X>292</X><Y>624</Y>
+			<IMAGES>
+				<FILE>./data/images/start_btn.png</FILE>
+				<FILE>./data/images/start_btn.png</FILE>
+			</IMAGES>
+			<CAPTION>
+				<CHI>undefined</CHI>
+			</CAPTION>
+			<NEXT_PAGE>index</NEXT_PAGE>
 			<MESSAGE>B</MESSAGE>
 		</BUTTON>
- 		
 	</PAGE>
 	
 </ALL_PAGES>

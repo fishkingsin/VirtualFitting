@@ -13,10 +13,10 @@ var proceed = true;
 
 // user's windows environment.
 // Replace "MY_USERNAME" with your username
-var user = "/Users/jameskong/";
+
 
 // path from windows enviornment to the flas.
-var projectLocation = "Development/ActionScript3/VirtualFitting/src/data/swf/songlist/"
+var projectLocation = "file:///Users/jameskong/Dropbox/_Project/VirtualFitting/src/";
 
 
 
@@ -32,16 +32,29 @@ if(proceed){
 	var success = true;
 
 	// eg : path == "Documents and Settings/theHorseman/My Documents/scriptocalypse/source"	
-	var path =  "file:///"+user  + projectLocation;
+	var path =   projectLocation;
 
 
 	var files = [
-	"songlist.fla",
-	"category.fla",
-	"player.fla",
-	"solution.fla",					
-	"song_list_item.fla",					
 	
+	// "capture.fla",
+	"category.fla",
+	"countdown1.fla",
+	"countdown2.fla",
+	"confirmcover.fla",
+	// "enter_cover_message.fla",
+	"gamecore.fla",
+	// "inputmessage.fla",
+	"instruction.fla",
+	// "keyboard.fla",
+	"landing.fla",
+	"player.fla",
+	// "posttopage.fla",
+	"solution.fla",
+	"song_list_item.fla",
+	"songlist.fla",
+	"selectcover.fla",
+	"VirtualFitting.fla",
 	];
 	fl.trace("Proceeding");
 	var i = 0;
@@ -63,7 +76,7 @@ if(proceed){
 
 		exists = FLfile.exists(path);
 		if(!exists){
-			alert("Failed to find "+drive+path);
+			//alert("Failed to find "+path);
 			success = false;
 			break;
 		}
@@ -81,21 +94,21 @@ if(proceed){
 			fl.openDocument(fileURI);
 			DOM = fl.getDocumentDOM();
 			publishSuccess = publish(DOM, logURI);
-
+			fl.trace(publishSuccess)
 			if(!publishSuccess){
-				alert("Failed to publish "+files[i]+"!");
+				//alert("Failed to publish "+files[i]+"!");
 				fl.trace("Failed to publish "+files[i]+"!\n  Checking the errors.txt log for more details...\n\n"+FLfile.read(errorsURI)+"\n-------------------------------------------------------------------\n");
 				success = false;
-				break;
+				//break;
 			}
 			successLog += ("published : "+files[i]+"\n");
-			DOM.close();
+			//DOM.close();
 
 		}else{
-			alert("Failed to open "+files[i]+"!");
+			//alert("Failed to open "+files[i]+"!");
 			fl.trace("The file '"+fileURI+"' does not exist!\n");
 			success = false;
-			break;
+			//break;
 		}
 
 	}
@@ -104,13 +117,13 @@ if(proceed){
 		fl.trace("----------------------\n------ Results -------\n----------------------\n");
 		fl.trace(successLog);		
 		fl.trace("-------------------------\n--- Publish Succeeded ---\n-------------------------");
-		alert("Batch Publish Succeeded!");
+		//alert("Batch Publish Succeeded!");
 	}else{
 		fl.trace("----------------------\n------ Results -------\n----------------------\n");
 		fl.trace(successLog);
 		fl.trace("FAILED AT : "+files[i]+"!");
 		fl.trace("\n----------------------\n--- PUBLISH FAILED ---\n----------------------");
-		alert("BATCH PUBLISH FAILED!");
+		//alert("BATCH PUBLISH FAILED!");
 	}
 }
 

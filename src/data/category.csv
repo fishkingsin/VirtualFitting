@@ -1,4 +1,4 @@
 Artist,Song Name,file,cover
-,POP,./data/POP.csv,data/images/pop/01 cover.jpg
-,ROCK,./data/ROCK.csv,data/images/rock/01 cover.jpg
-,RELAXING,./data/RELAXING.csv,data/images/relaxing/01 cover.jpg
+,POP,POP.csv,data/images/pop/01_cover.jpg
+,ROCK,ROCK.csv,data/images/rock/01_cover.jpg
+,RELAXING,RELAXING.csv,data/images/relaxing/01_cover.jpg

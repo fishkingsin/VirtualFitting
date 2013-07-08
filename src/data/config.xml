@@ -7,12 +7,12 @@
     <X>100</X>
     <Y>0</Y>
   </LOGGER>
-  <debugMode>true</debugMode>
+  <debugMode>false</debugMode>
   <alwaysOnTop>false</alwaysOnTop>
   <FullScreen>false</FullScreen>
   <hideMouse>false</hideMouse>
   <startX>0</startX>
   <startY>25</startY>
-  <startW>720</startW>
-  <startH>1280</startH>
+  <startW>504</startW>
+  <startH>900</startH>
 </XML>
