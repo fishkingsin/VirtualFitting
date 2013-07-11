@@ -10,7 +10,9 @@
 	public class solution extends MovieClip {
 		var WIDTH = 720;
 		var HEIGHT = 1280;
-		var _category:String;
+		var _data:Object;
+		var category_data:Object;
+		
 		public function solution() {
 			
 			
@@ -47,26 +49,30 @@
 			category.loaderContent.addEventListener(SongListEvent.SONG_CATEGORY,onCategoryList);
 			});
 		}
-		function createSongList(category_csv:String)
+		function createSongList(category_csv:Object)
 		{
-			MySharedObjectConstant.setCategory(category_csv);
-			_category = "./data/"+category_csv;
 			
+			category_data = category_csv;
+			trace(category_data);
+			MySharedObjectConstant.setCategory(category_data.FILE);
+			//_category = category_csv.FILE;
+			//_title = category_csv.SONG_NAME;
 			var songlist:SmoothingBitmapLoader = new SmoothingBitmapLoader(getFullPath(loaderInfo) +"songlist.swf");
 			songlist.addEventListener(SmoothingBitmapLoader.INIT,function onLoaded(e:Event)
 			{
-			songlist.removeEventListener(SmoothingBitmapLoader.INIT,onLoaded);
-			songlist.loaderContent.updateCategory(getFullPath(loaderInfo) +_category);
-			songlist.loaderContent.addEventListener(SongListEvent.SONG_LIST,onSongList);
-			addChild(songlist);
-			songlist.loaderContent.addEventListener(MyEvent.GO_TO_PREVIOUS_PAGE,function gotoPreviousPage(e:Event)
-			{
-			while(numChildren>0)
-			{
-			removeChildAt(0);
-			}
-			createCategoryList();
-			});
+				songlist.removeEventListener(SmoothingBitmapLoader.INIT,onLoaded);
+				songlist.loaderContent.updateCategory(category_data.SONG_NAME , "./data/"+category_data.FILE);
+					
+				songlist.loaderContent.addEventListener(SongListEvent.SONG_LIST,onSongList);
+				addChild(songlist);
+				songlist.loaderContent.addEventListener(MyEvent.GO_TO_PREVIOUS_PAGE,function gotoPreviousPage(e:Event)
+				{
+					while(numChildren>0)
+					{
+						removeChildAt(0);
+					}
+					createCategoryList();
+				});
 			});
 		}
 		
@@ -88,7 +94,7 @@
 		function onSongList(e:SongListEvent)
 		{
 			//Logger.debug("onSongList ",e.data);
-			var _data:Object = e.data as Object;
+			_data = e.data as Object;
 			//e.target.loaderContent.removeEventListener(SongListEvent.SONG_LIST,onSongList);
 			while (numChildren>0)
 			{
@@ -137,7 +143,7 @@
 					removeChildAt(0);
 				}
 				//createCategoryList();
-				createSongList(_category);
+				createSongList(category_data);
 			});
 			addChild(player);
 			
@@ -146,7 +152,7 @@
 		function onSongConfirm(e:SongListEvent)
 		{
 			removeEventListener(SongListEvent.SONG_CONFIRM,onSongConfirm);
-			var _data:Object = e.data as Object;
+			 _data = (e.data as Object);
 			Logger.debug("onSongConfirm ",_data.FILE);
 		
 		}

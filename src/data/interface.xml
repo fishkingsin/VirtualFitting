@@ -229,14 +229,7 @@
 			</IMAGES>
 		</BACKGROUND>
 	</PAGE>
-	<PAGE name="selectcover">
-		<BACKGROUND>
-			<IMAGES>
-				<FILE>./selectcover.swf</FILE>
-				
-			</IMAGES>
-		</BACKGROUND>
-	</PAGE>
+
 	<PAGE name="postfacebook">
 		<BACKGROUND>
 			<IMAGES>
@@ -244,8 +237,8 @@
 				
 			</IMAGES>
 		</BACKGROUND>
-		<!-- 292 624 -->
-		<BUTTON name="postfacebook_btn_back">
+		
+		<!-- <BUTTON name="postfacebook_btn_back">
 			<SKIP_VIDEO>1</SKIP_VIDEO>
 			
 			<SHOW_LABLE>0</SHOW_LABLE><X>292</X><Y>624</Y>
@@ -258,7 +251,7 @@
 			</CAPTION>
 			<NEXT_PAGE>index</NEXT_PAGE>
 			<MESSAGE>B</MESSAGE>
-		</BUTTON>
+		</BUTTON> -->
 	</PAGE>
 	
 </ALL_PAGES>

@@ -152,6 +152,24 @@
 					s.loaderContent.addEventListener(MyEvent.GO_TO_NEXT_PAGE,function onNext(e:Event)
 					{
 						MySharedObjectConstant.setSavedPhoto(captureAndSave(s.loaderContent.cover));
+						
+						var fb:SmoothingBitmapLoader = new SmoothingBitmapLoader("./postfacebook.swf");
+						fb.addEventListener(PostToFacabook.UPLOAD_COMPLETE,function onUploadComplete(e:Event)
+						{
+							fb.removeEventListener(PostToFacabook.UPLOAD_COMPLETE, onUploadComplete);
+							dispatchEvent(new Event(PostToFacabook.UPLOAD_COMPLETE));
+						});
+						fb.addEventListener(SmoothingBitmapLoader.INIT,function onLoaded(e:Event)
+						{
+							fb.loaderContent.addEventListener(MyEvent.GO_TO_NEXT_PAGE,function onNext(e:Event)
+							{
+								removeChild(fb);
+								
+							});
+							removeChild(s);
+							addChild(fb);
+						});
+						
 					});
 					
 					var i:uint = 0;

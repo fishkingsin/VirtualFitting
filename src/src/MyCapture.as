@@ -17,7 +17,7 @@
 
 
 		private var delay:uint = 1000;
-		private var repeat:uint = 5;
+		private var repeat:uint = 6;
 		private var repeat2:uint = 11;
 		private var numSnap:uint = 5;
 		private var Timer1:Timer = new Timer(delay, repeat);
@@ -31,10 +31,14 @@
 		var sc2:SoundChannel;//= new SoundChannel  ;
 		var st2:SoundTransform;//= new SoundTransform  ;
 		
+		var snd3:Sound;//= new Sound  ;
+		var sc3:SoundChannel;//= new SoundChannel  ;
+		var st3:SoundTransform;//= new SoundTransform  ;
+		
 		var savedBitmap:Array = new Array();
 		var counter1:SmoothingBitmapLoader;
 		var counter2:SmoothingBitmapLoader;
-		var blink:MovieClip = new MovieClip();
+		var blink:SmoothingBitmapLoader;
 		private static const modelPath:String = "./data/images/model/";
 		private static const myPath:String = "./data/images/";
 		private static const TAG:String = "gamecore";
@@ -51,15 +55,18 @@
 		public function MyCapture() {
 			// constructor code
 			super();
-			
+			snd3 = new Sound(new URLRequest("./data/Morse.mp3"));
+			sc3 = new SoundChannel  ;
+			st3 = new SoundTransform  ;
 		}
 		override protected function init()
 		{
 			super.init();
 			Start();
-			blink.graphics.beginFill(0xFFFFFF,1.0);
+			blink = new SmoothingBitmapLoader("./flashing.swf");
+			/*blink.graphics.beginFill(0xFFFFFF,1.0);
 			blink.graphics.drawRect(0,0,720,1280);
-			blink.graphics.endFill();
+			blink.graphics.endFill();*/
 			
 			Logger.debug(TAG,MySharedObjectConstant.getCategory());
 			if(MySharedObjectConstant.getCategory()!=null)
@@ -69,7 +76,7 @@
 			}
 			else
 			{
-				MySharedObjectConstant.setCategory("POP.csv");
+				MySharedObjectConstant.setCategory("POP");
 				modelData= new ModelData(getRootPath()+modelPath+MySharedObjectConstant.getCategory());
 			}
 			modelData.addEventListener(Event.COMPLETE,function onDataLoaded(e:Event)
@@ -150,6 +157,7 @@
 			repeat--;
 			counter1.loaderContent.gotoAndStop(counter1.loaderContent.currentFrame+1);
 			Logger.debug("Counter "+ repeat);
+			if(repeat>0)playMorse();
 
 		}
 		private function initSound()
@@ -157,7 +165,8 @@
 			Logger.debug(TAG+ " initSount" + MySharedObjectConstant.getSongPath());
 			var songPath:String;
 			if(MySharedObjectConstant.getSongPath()!=null)songPath = MySharedObjectConstant.getSongPath();
-			else songPath = "./data/mp3/pop/1.mp3";
+			else songPath = "./data/mp3/pop/01.mp3";
+			Logger.debug(TAG+ " songPath "+songPath);
 			snd = new Sound(new URLRequest(songPath));
 			sc = new SoundChannel  ;
 			st = new SoundTransform  ;
@@ -173,12 +182,20 @@
 			sc2 = new SoundChannel  ;
 			st2 = new SoundTransform  ;
 			
+			
+			
 		}
 		private function playShutter()
 		{
 			sc2 = snd2.play();
 			st2.volume = 1;
 			sc2.soundTransform = st2;
+		}
+		private function playMorse()
+		{
+			sc3 = snd3.play();
+			st3.volume = 1;
+			sc3.soundTransform = st3;
 		}
 		override protected function destroy()
 		{
@@ -198,7 +215,13 @@
 			/*	snd = new Sound  ;
 			sc = new SoundChannel  ;
 			st = new SoundTransform  ;*/
-				sc.stop();
+				TweenMax.to(sc, 1, {volume:0, onComplete:function stopSound()
+								{
+									
+			
+									if(sc!=null)sc.stop();
+									
+								}});
 			}
 			
 		}
@@ -221,6 +244,10 @@
 			repeat2--;
 			Logger.debug("Time 2 repeat2 "+ repeat2);
 			counter2.loaderContent.gotoAndStop(counter2.loaderContent.currentFrame+1);
+			if(repeat2>1 &&  repeat2<7)
+			{
+				playMorse();
+			}
 			if(repeat2==1)
 			{
 				playShutter();
@@ -229,10 +256,10 @@
 				Pause();
 				addChild(blink);
 				blink.alpha = 1;
-				
+				blink.loaderContent.play();
 				super.bitmapData.draw(modelData.loadedData[ ranNumbers[index]].CLOTH);
 				
-				TweenMax.to(blink,1,{alpha:0,onComplete:function onCompleteFunction()
+				TweenMax.to(blink,1,{alpha:1,onComplete:function onCompleteFunction()
 					{
 						removeChild(blink);
 					}});
@@ -252,7 +279,7 @@
 			{
 				Pause();
 				saveImage();
-				sc.stop();
+				//sc.stop();
 				Timer2.removeEventListener(TimerEvent.TIMER, timerHandler2);
 				Timer2.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler2);
 				Logger.debug("Time 2 Complete");
@@ -263,10 +290,25 @@
 				}
 				
 				removeChild(shadow);
+
+				/**/
+				
 				addEventListener(Event.ENTER_FRAME, function renderHandler(event:Event)
 				{
 					saveImages();
 					addChild(fishBMP);
+					
+					fishBMP.addEventListener(PostToFacabook.UPLOAD_COMPLETE,function onUploadComplete(e:Event)
+						{
+							fishBMP.removeEventListener(PostToFacabook.UPLOAD_COMPLETE, onUploadComplete);
+							//dispatchEvent(new Event(PostToFacabook.UPLOAD_COMPLETE));
+							
+							TweenMax.to(sc, 1, {volume:0, onComplete:function stopSound()
+								{
+									if(sc!=null)sc.stop();
+								}});
+						});
+					
 					removeEventListener(Event.ENTER_FRAME, renderHandler );
 				});
 					
@@ -349,6 +391,20 @@
 			//}
 			MySharedObjectConstant.setSavedPhotos(paths);
 		}
+		override protected function captureAndSave(_bitmapData:BitmapData):String
+		{
+			var now:Date = new Date();
+			var timestamp:String = now.valueOf().toString();
+			
+			var path:String = timestamp+".png"
+			var file:File = new File(File.documentsDirectory.nativePath + path);
+
+			var stream:FileStream = new FileStream();
+			stream.open(file, FileMode.WRITE);
+			stream.writeBytes(PNGEncoder.encode(_bitmapData));
+			stream.close();
+			return path;
+		}
 		function randomNumber(min:Number, max:Number):Number {
 			//good
 			return Math.floor(Math.random() * (1 + max - min) + min);
@@ -359,7 +415,7 @@
 			shadow.scaleX = shadow.scaleY = SCALE;
 			shadow.x = -((shadow.width*0.5)-MIDX );
 			shadow.y = -((shadow.height*0.5)-MIDY );
-			TweenMax.to(shadow,8,{scaleX:1,scaleY:1,x:0,y:0});
+			TweenMax.to(shadow,5,{scaleX:1,scaleY:1,x:0,y:0});
 		}
 	}
 
