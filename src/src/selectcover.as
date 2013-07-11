@@ -245,6 +245,7 @@
 			stream.open(file, FileMode.WRITE);
 			stream.writeBytes(PNGEncoder.encode(_bitmapData));
 			stream.close();
+			_bitmapData.dispose();
 			return path;
 		}
 		
