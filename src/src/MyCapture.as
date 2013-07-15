@@ -31,13 +31,13 @@
 		var st:SoundTransform;//= new SoundTransform  ;
 		
 		
-		var snd2:Sound;//= new Sound  ;
-		var sc2:SoundChannel;//= new SoundChannel  ;
-		var st2:SoundTransform;//= new SoundTransform  ;
+		var shutterSound:Sound;//= new Sound  ;
+		var shutterSoundChannel:SoundChannel;//= new SoundChannel  ;
+		var shutterSoundTransform:SoundTransform;//= new SoundTransform  ;
 		
-		var snd3:Sound;//= new Sound  ;
-		var sc3:SoundChannel;//= new SoundChannel  ;
-		var st3:SoundTransform;//= new SoundTransform  ;
+		var counterSound:Sound;//= new Sound  ;
+		var counterSoundChannel:SoundChannel;//= new SoundChannel  ;
+		var counterSoundTransform:SoundTransform;//= new SoundTransform  ;
 		
 		var savedBitmap:Array = new Array();
 		var counter1:SmoothingBitmapLoader;
@@ -59,9 +59,9 @@
 		public function MyCapture() {
 			// constructor code
 			super();
-			snd3 = new Sound(new URLRequest("./data/Morse.mp3"));
-			sc3 = new SoundChannel  ;
-			st3 = new SoundTransform  ;
+			counterSound = new Sound(new URLRequest("./data/Morse.mp3"));
+			counterSoundChannel = new SoundChannel  ;
+			counterSoundTransform = new SoundTransform  ;
 		}
 		override protected function init()
 		{
@@ -183,24 +183,24 @@
 			sc.soundTransform = st;
 			
 			
-			snd2 = new Sound(new URLRequest("./data/CAMERA.mp3"));
-			sc2 = new SoundChannel  ;
-			st2 = new SoundTransform  ;
+			shutterSound = new Sound(new URLRequest("./data/CAMERA.mp3"));
+			shutterSoundChannel = new SoundChannel  ;
+			shutterSoundTransform = new SoundTransform  ;
 			
 			
 			
 		}
 		private function playShutter()
 		{
-			sc2 = snd2.play();
-			st2.volume = 1;
-			sc2.soundTransform = st2;
+			shutterSoundChannel = shutterSound.play();
+			shutterSoundTransform.volume = 0.5;
+			shutterSoundChannel.soundTransform = shutterSoundTransform;
 		}
 		private function playMorse()
 		{
-			sc3 = snd3.play();
-			st3.volume = 1;
-			sc3.soundTransform = st3;
+			counterSoundChannel = counterSound.play();
+			counterSoundTransform.volume = 0.5;
+			counterSoundChannel.soundTransform = counterSoundTransform;
 		}
 		override protected function destroy()
 		{
