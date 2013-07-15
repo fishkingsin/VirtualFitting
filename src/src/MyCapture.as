@@ -42,7 +42,7 @@
 		var savedBitmap:Array = new Array();
 		var counter1:SmoothingBitmapLoader;
 		var counter2:SmoothingBitmapLoader;
-		var blink:SmoothingBitmapLoader;
+		var blink:BitmapLoader;
 		private static const modelPath:String = "./data/images/model/";
 		private static const myPath:String = "./data/images/";
 		private static const TAG:String = "gamecore";
@@ -67,7 +67,7 @@
 		{
 			super.init();
 			Start();
-			blink = new SmoothingBitmapLoader("./flashing.swf");
+			blink = new BitmapLoader("./flashing.swf");
 			/*blink.graphics.beginFill(0xFFFFFF,1.0);
 			blink.graphics.drawRect(0,0,720,1280);
 			blink.graphics.endFill();*/
@@ -204,7 +204,9 @@
 		}
 		override protected function destroy()
 		{
+			
 			try{
+				blink.remove();
 				for (var i:int = 0; i < modelData.loadedData.length; i++)
 				{
 					

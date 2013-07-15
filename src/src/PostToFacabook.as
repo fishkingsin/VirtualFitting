@@ -59,10 +59,10 @@
 			var xml1:XML=<BUTTON name="postfacebook_btn_back">
 			<SKIP_VIDEO>1</SKIP_VIDEO>
 			
-			<SHOW_LABLE>0</SHOW_LABLE><X>292</X><Y>624</Y>
+			<SHOW_LABLE>0</SHOW_LABLE><X>294</X><Y>667</Y>
 			<IMAGES>
-				<FILE>{myPath+"start_btn.png"}</FILE>
-				<FILE>{myPath+"start_btn.png"}</FILE>
+				<FILE>{myPath+"btn_image_small.png"}</FILE>
+				<FILE>{myPath+"btn_image_small.png"}</FILE>
 				</IMAGES>
 			<CAPTION>
 				<CHI>undefined</CHI>
