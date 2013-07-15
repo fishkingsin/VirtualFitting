@@ -12,7 +12,7 @@
   <FullScreen>false</FullScreen>
   <hideMouse>false</hideMouse>
   <startX>0</startX>
-  <startY>25</startY>
-  <startW>504</startW>
-  <startH>900</startH>
+  <startY>0</startY>
+  <startW>720</startW>
+  <startH>1280</startH>
 </XML>

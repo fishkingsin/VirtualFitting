@@ -46,7 +46,22 @@
 		function onRemoved(e:Event):void
 		{
 			removeEventListener( Event.REMOVED_FROM_STAGE,onRemoved);
-		
+			try{
+				
+				/*for each(var loader:BitmapLoader in thumbnails)
+				{
+					loader.remove();
+				}*/
+				Logger.debug("selectcover : removeAll Child");
+				trace("selectcover : removeAll Child");
+				while(numChildren>0)
+				{
+					removeChildAt(0);
+				}
+			}catch (e: * )
+			{
+				trace("gamecore destory error:"+e.toString());
+			}
 		}
 
 
@@ -57,20 +72,20 @@
 			{
 				//return;
 				thumbs = ["./data/temp.png",
-				"./data/temp.png",
-				"./data/temp.png",
-				"./data/temp.png",
-				"./data/temp.png"];
+				"./data/temp 2.png",
+				"./data/temp 3.png",
+				"./data/temp 4.png",
+				"./data/temp 5.png"];
 			}
 			
 				
 			for each (var t:String in thumbs)
 			{
-				var s:SmoothingBitmapLoader = new SmoothingBitmapLoader(t);
-				s.addEventListener(SmoothingBitmapLoader.INIT,function onLoaded(e:Event)
+				var s:BitmapLoader = new BitmapLoader(t);
+				s.addEventListener(BitmapLoader.INIT,function onLoaded(e:Event)
 				{
 					//if(t==thumbs[0])
-					var b:SmoothingBitmapLoader = e.target as SmoothingBitmapLoader;
+					var b:BitmapLoader = e.target as BitmapLoader;
 					thumbnails.push(b);
 					if(thumbnails.length==1){
 						
@@ -101,6 +116,7 @@
 			btn1 = new customButton(xml1,1);
 			addChild(btn1);
 			btn1.addEventListener(MouseEvent.CLICK,onClick);
+				
 			var xml2:XML=<BUTTON name="button_next">
 				<SHOW_LABLE>0</SHOW_LABLE><X>588</X><Y>489</Y>
 				<IMAGES>
@@ -114,9 +130,9 @@
 				<MESSAGE>0</MESSAGE>;
 				</BUTTON>;
 			
-				btn2 = new customButton(xml2,1);
-				addChild(btn2);
-				btn2.addEventListener(MouseEvent.CLICK, onClick);
+			btn2 = new customButton(xml2,1);
+			addChild(btn2);
+			btn2.addEventListener(MouseEvent.CLICK, onClick);
 				
 				
 				
@@ -154,16 +170,19 @@
 						MySharedObjectConstant.setSavedPhoto(captureAndSave(s.loaderContent.cover));
 						
 						var fb:SmoothingBitmapLoader = new SmoothingBitmapLoader("./postfacebook.swf");
-						fb.addEventListener(PostToFacabook.UPLOAD_COMPLETE,function onUploadComplete(e:Event)
-						{
-							fb.removeEventListener(PostToFacabook.UPLOAD_COMPLETE, onUploadComplete);
-							dispatchEvent(new Event(PostToFacabook.UPLOAD_COMPLETE));
-						});
+						
 						fb.addEventListener(SmoothingBitmapLoader.INIT,function onLoaded(e:Event)
 						{
+							fb.loaderContent.addEventListener(MySharedObjectConstant.UPLOAD_COMPLETE,function onUploadComplete(e:Event)
+							{
+								fb.loaderContent.removeEventListener(MySharedObjectConstant.UPLOAD_COMPLETE, onUploadComplete);
+								dispatchEvent(new Event(MySharedObjectConstant.UPLOAD_COMPLETE));
+							});
 							fb.loaderContent.addEventListener(MyEvent.GO_TO_NEXT_PAGE,function onNext(e:Event)
 							{
-								removeChild(fb);
+								fb.loaderContent.removeEventListener(MyEvent.GO_TO_NEXT_PAGE, onNext);
+								dispatchEvent(new Event(MyEvent.GO_TO_NEXT_PAGE));
+								//removeChild(fb);
 								
 							});
 							removeChild(s);
@@ -173,7 +192,7 @@
 					});
 					
 					var i:uint = 0;
-					for each(var img:SmoothingBitmapLoader in thumbnails)
+					for each(var img:BitmapLoader in thumbnails)
 					{
 						if(img!=thumbnails[index])
 						{
@@ -196,38 +215,28 @@
 		}
 		function onClick(e:MouseEvent)
 		{
-			if(e.target == btn1)
+			if(e.target.name=="button_back")
 			{
-				cover.addChild(thumbnails[index]);
 				
-				if(index>0)
-				{
 					index--;
+				if(index<0)index=0;
 					thumbnails[index].loaderContent.width = WIDTH;
 					thumbnails[index].loaderContent.height = HEIGHT;
 					cover.addChild(thumbnails[index]);
 					bar.gotoAndStop(index+1);
-				}
-				else
-				{
-					index = 0;
-				}
+				
 			}
-			else if(e.target == btn2)
+			if(e.target.name=="button_next")
 			{
-				cover.addChild(thumbnails[index]);
+				//cover.addChild(thumbnails[index]);
 				index++;
-				if(index<thumbnails.length)
-				{
+				if(index>thumbnails.length-1)index = thumbnails.length-1;
+				
 					thumbnails[index].loaderContent.width = WIDTH;
 						thumbnails[index].loaderContent.height = HEIGHT;
 					cover.addChild(thumbnails[index]);
 					bar.gotoAndStop(index+1);
-				}
-				else
-				{
-					index = thumbnails.length-1;
-				}
+				
 			}
 		}
 		
@@ -237,7 +246,7 @@
 			_bitmapData.draw(mc);
 			var now:Date = new Date();
 			var timestamp:String = now.valueOf().toString();
-			var path:String = "/data/"+timestamp+".png"
+			var path:String = "/capture/"+timestamp+".png"
 			
 			var file:File = new File(File.applicationDirectory.nativePath + path);
 

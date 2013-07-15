@@ -35,7 +35,17 @@
 		function onRemoved(e:Event):void
 		{
 			removeEventListener( Event.REMOVED_FROM_STAGE,onRemoved);
-		
+			try{
+				Logger.debug("solution : removeAll Child");
+				trace("solution : removeAll Child");
+				while(numChildren>0)
+				{
+					removeChildAt(0);
+				}
+			}catch (e: * )
+			{
+				trace("solution destory error:"+e.toString());
+			}
 		}
 
 		function createCategoryList()

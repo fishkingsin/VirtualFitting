@@ -30,7 +30,7 @@
 				<FILE>./landing.swf</FILE>
 			</IMAGES>
 		</BACKGROUND>
-		<BUTTON name="index_btn_1">
+		<!-- <BUTTON name="index_btn_1">
 			<SHOW_LABLE>0</SHOW_LABLE><X>284</X><Y>590</Y>
 			<IMAGES>
 				<FILE>./data/images/start_btn.png</FILE>
@@ -44,7 +44,7 @@
 			</FILES>
 			<NEXT_PAGE>instruction</NEXT_PAGE>
 			<MESSAGE></MESSAGE>
-		</BUTTON>
+		</BUTTON> -->
 	</PAGE>
 	<PAGE name="instruction">
 		<BACKGROUND>

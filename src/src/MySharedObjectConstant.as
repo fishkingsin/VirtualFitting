@@ -13,6 +13,7 @@
         
 		public static const KEY_HOST = "virtualfitting";
 		public static const TAG = "MySharedObjectConstant";
+		public static const UPLOAD_COMPLETE:String = "upload_complete";
 		function MySharedObjectConstant()
 		{
 			

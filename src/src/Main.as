@@ -26,8 +26,8 @@
 				Timer1.repeatCount = repeat;
 			});				}
 		private function timerHandler(e:TimerEvent):void{
-			var timer:Timer = e.target as Timer ;
-			Logger.debug("Counter "+ timer.currentCount);
+			//var timer:Timer = e.target as Timer ;
+			//Logger.debug("Counter "+ timer.currentCount);
 
 		}
 		private function completeHandler(e:TimerEvent):void {
@@ -51,8 +51,8 @@
 						currentPageSprite.alpha = 0;
 						
 						pages.addChild(currentPageSprite);
-						TweenMax.to(currentPageSprite,0.5,{alpha:1 });
-						TweenMax.to(prevPage,0.5,{alpha:1,onComplete:onCompleteFunction ,onCompleteParams:[pages, currentPageSprite]});
+						TweenMax.to(currentPageSprite,0.5,{delay:1,alpha:1 });
+						TweenMax.to(prevPage,0.5,{alpha:1,delay:1,onComplete:onCompleteFunction ,onCompleteParams:[pages, currentPageSprite]});
 						playbackFX(snd);
 					}
 				}
@@ -68,7 +68,7 @@
 						screenLock = true;						var pressedButton = e.target as customButton;						var currentPageSprite = minterface.getPageByName(pressedButton.nextPage);						if(currentPageSprite!=null)
 						{
 							
-														currentPageSprite.alpha = 0;														pages.addChild(currentPageSprite);							TweenMax.to(currentPageSprite,0.5,{alpha:1 });							TweenMax.to(prevPage,0.5,{alpha:1,onComplete:onCompleteFunction ,onCompleteParams:[pages, currentPageSprite]});							playbackFX(snd);
+														currentPageSprite.alpha = 0;														pages.addChild(currentPageSprite);							TweenMax.to(currentPageSprite,0.5,{delay:1,alpha:1 });							TweenMax.to(prevPage,0.5,{delay:1,alpha:1,onComplete:onCompleteFunction ,onCompleteParams:[pages, currentPageSprite]});							playbackFX(snd);
 						}					}					return;					break;			}		}		}		function onCompleteFunction(_parent:Sprite, nextPage:Sprite):void		{			for (var i = 0; i< _parent.numChildren; i++)			{				var mc = _parent.getChildAt(i);				Logger.debug("MC name : "+mc.name);				if (mc.name != nextPage.name)				{					_parent.removeChild(mc);				}
 			}			/*for each( var mc in _parent)			{			Logger.debug("MC name : "+mc.name);			if(mc != nextPage)			{			_parent.removeChild(mc);			}			}*/			prevPage = nextPage;			try			{				new LocalConnection().connect('foo');				new LocalConnection().connect('foo');			}			catch (e: * )			{				Logger.debug("Forcing Garbage Collection :"+e.toString());			}
 			screenLock=false;		}		function playbackFX(_snd: * ):void		{			try			{				if (_snd!=null && _snd is Sound)				{					var sound:Sound = _snd as Sound;					sc = sound.play();					st.volume = 0.5;					sc.soundTransform = st;				}			}			catch (e:Error)			{			}		}

@@ -36,25 +36,27 @@ if(proceed){
 
 
 	var files = [
-	
-	// "capture.fla",
-	"category.fla",
-	"countdown1.fla",
-	"countdown2.fla",
-	"confirmcover.fla",
-	// "enter_cover_message.fla",
 	"gamecore.fla",
-	// "inputmessage.fla",
-	"instruction.fla",
-	// "keyboard.fla",
-	"landing.fla",
-	"player.fla",
-	// "posttopage.fla",
-	"solution.fla",
-	"song_list_item.fla",
-	"songlist.fla",
 	"selectcover.fla",
-	"VirtualFitting.fla",
+	"category.fla",
+	"instruction.fla",
+	"solution.fla",
+	"category_list_item.fla",
+	"song_list_item.fla",
+	"circle.fla",
+	"landing.fla",
+	"songlist.fla",
+	"confirmcover.fla",
+	"landingbutton.fla",
+	"startbutton.fla",
+	"countdown1.fla",
+	"player.fla",
+	"wave.fla",
+	"countdown2.fla",
+	"postfacebook.fla",
+	"flashing.fla",
+	"keyboard.fla",
+	"coverflow.fla"
 	];
 	fl.trace("Proceeding");
 	var i = 0;

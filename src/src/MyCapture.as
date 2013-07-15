@@ -13,6 +13,10 @@
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import net.hires.debug.Logger;
+	import flash.filesystem.File;
+	import flash.filesystem.FileStream;
+	import flash.filesystem.FileMode;
+	import com.adobe.images.PNGEncoder;
 	public class MyCapture extends Capture {
 
 
@@ -131,6 +135,7 @@
 						{
 							
 							delayTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, _completeHandler);
+							delayTimer = null;
 							Timer1.start(); 
 							
 							Timer1.addEventListener(TimerEvent.TIMER, timerHandler);
@@ -199,36 +204,57 @@
 		}
 		override protected function destroy()
 		{
-			super.destroy();
-			Timer1.removeEventListener(TimerEvent.TIMER, timerHandler);
-			Timer1.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler);
-			Timer2.removeEventListener(TimerEvent.TIMER, timerHandler2);
-			Timer2.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler2);
-			while(savedBitmap.length>0)
-			{
+			try{
+				super.destroy();
+				Timer1.removeEventListener(TimerEvent.TIMER, timerHandler);
+				Timer1.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler);
+				Timer2.removeEventListener(TimerEvent.TIMER, timerHandler2);
+				Timer2.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler2);
+				while(savedBitmap.length>0)
+				{
+					
+					var bmd:BitmapData = savedBitmap.pop();
+					bmd.dispose();
+				}
 				
-				var bmd:BitmapData = savedBitmap.pop();
-				bmd.dispose();
-			}
-			if(snd!=null)
+				if(snd!=null)
+				{
+				/*	snd = new Sound  ;
+				sc = new SoundChannel  ;
+				st = new SoundTransform  ;*/
+					TweenMax.to(sc, delay, {volume:0, onComplete:function stopSound()
+									{
+										
+				
+										if(sc!=null)sc.stop();
+										
+									}});
+				}
+			}catch (e: * )
 			{
-			/*	snd = new Sound  ;
-			sc = new SoundChannel  ;
-			st = new SoundTransform  ;*/
-				TweenMax.to(sc, 1, {volume:0, onComplete:function stopSound()
-								{
-									
-			
-									if(sc!=null)sc.stop();
-									
-								}});
+				Logger.debug("gamecore destory error:"+e.toString());
+				trace("gamecore destory error:"+e.toString());
 			}
+			
+			try{
+				Logger.debug("gamecord : removeAll Child");
+				trace("gamecord : removeAll Child");
+				while(numChildren>0)
+				{
+					removeChildAt(0);
+				}
+			}catch (e: * )
+			{
+				trace("gamecore destory error:"+e.toString());
+			}
+			
 			
 		}
 		private function completeHandler(e:TimerEvent):void {
 			initSound();
 			Timer1.removeEventListener(TimerEvent.TIMER, timerHandler);
 			Timer1.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler);
+			Timer1 = null;
 			repeat2 = 11;
 			repeat = 5;
 			Timer2.start(); 
@@ -282,6 +308,7 @@
 				//sc.stop();
 				Timer2.removeEventListener(TimerEvent.TIMER, timerHandler2);
 				Timer2.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler2);
+				Timer2 = null;
 				Logger.debug("Time 2 Complete");
 
 				if (vid!=null && cam!=null )
@@ -298,16 +325,26 @@
 					saveImages();
 					addChild(fishBMP);
 					
-					fishBMP.addEventListener(PostToFacabook.UPLOAD_COMPLETE,function onUploadComplete(e:Event)
+					fishBMP.loaderContent.addEventListener(MySharedObjectConstant.UPLOAD_COMPLETE,function onUploadComplete(e:Event)
 						{
-							fishBMP.removeEventListener(PostToFacabook.UPLOAD_COMPLETE, onUploadComplete);
+							fishBMP.loaderContent.removeEventListener(MySharedObjectConstant.UPLOAD_COMPLETE, onUploadComplete);
 							//dispatchEvent(new Event(PostToFacabook.UPLOAD_COMPLETE));
 							
+	
 							TweenMax.to(sc, 1, {volume:0, onComplete:function stopSound()
 								{
 									if(sc!=null)sc.stop();
 								}});
 						});
+						
+					fishBMP.loaderContent.addEventListener(MyEvent.GO_TO_NEXT_PAGE,function onNext(e:Event)
+					{
+						fishBMP.loaderContent.removeEventListener(MyEvent.GO_TO_NEXT_PAGE, onNext);
+						dispatchEvent(new Event(MyEvent.GO_TO_NEXT_PAGE));
+						removeChild(fishBMP);
+						destroy();
+					});
+
 					
 					removeEventListener(Event.ENTER_FRAME, renderHandler );
 				});
@@ -391,20 +428,7 @@
 			//}
 			MySharedObjectConstant.setSavedPhotos(paths);
 		}
-		override protected function captureAndSave(_bitmapData:BitmapData):String
-		{
-			var now:Date = new Date();
-			var timestamp:String = now.valueOf().toString();
-			
-			var path:String = timestamp+".png"
-			var file:File = new File(File.documentsDirectory.nativePath + path);
-
-			var stream:FileStream = new FileStream();
-			stream.open(file, FileMode.WRITE);
-			stream.writeBytes(PNGEncoder.encode(_bitmapData));
-			stream.close();
-			return path;
-		}
+		
 		function randomNumber(min:Number, max:Number):Number {
 			//good
 			return Math.floor(Math.random() * (1 + max - min) + min);
