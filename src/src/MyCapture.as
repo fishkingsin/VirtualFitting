@@ -205,6 +205,20 @@
 		override protected function destroy()
 		{
 			try{
+				for (var i:int = 0; i < modelData.loadedData.length; i++)
+				{
+					
+					modelData.loadedData[i].CLOTH.remove();
+					modelData.loadedData[i].SHADOW.remove();
+					
+				}
+			}
+			catch (e: * )
+			{
+				trace("modelData destory error:"+e.toString());
+			}
+			
+			try{
 				super.destroy();
 				Timer1.removeEventListener(TimerEvent.TIMER, timerHandler);
 				Timer1.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler);
