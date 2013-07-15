@@ -246,7 +246,7 @@
 			_bitmapData.draw(mc);
 			var now:Date = new Date();
 			var timestamp:String = now.valueOf().toString();
-			var path:String = "/capture/"+timestamp+".png"
+			var path:String = "/capture2/"+timestamp+".png"
 			
 			var file:File = new File(File.applicationDirectory.nativePath + path);
 

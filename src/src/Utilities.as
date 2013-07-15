@@ -13,13 +13,13 @@
 		static public function addBadWord(_badWords:Array) {
 			badWords = _badWords;
 		}
-		static public function checkName(text:String):String {
-		  text = text.toLowerCase();
+		static public function checkName(_text:String):String {
+		  var text:String = _text.toLowerCase();
 		  
-		  for (var i:int = 0; i < charReplacements.length; i++ ) {
+		  /*for (var i:int = 0; i < charReplacements.length; i++ ) {
 			var ra:Array = charReplacements[i] as Array;
 			text = strReplace(text, ra[0], ra[1]);
-		  }
+		  }*/
 		  trace(text);
 		  for each (var w:Object in badWords) {
 			/*if (text.indexOf(String(w)) != -1) {
