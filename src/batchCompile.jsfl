@@ -16,7 +16,7 @@ var proceed = true;
 
 
 // path from windows enviornment to the flas.
-var projectLocation = "file:///Users/jameskong/Dropbox/_Project/VirtualFitting/src/";
+var projectLocation = "file:///Users/jameskong/Development/ActionScript3/VirtualFitting/src/";
 
 
 

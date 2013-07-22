@@ -19,8 +19,8 @@
 		
 		var thumbnails:Array=new Array();
 		private static const myPath:String = "./data/images/"
-		var btn1:customButton;
-		var btn2:customButton;
+		//var btn1:customButton;
+		//var btn2:customButton;
 		var index= 0;
 		var WIDTH = 447;//cover.width;
 			var HEIGHT = 729;//cover.height;
@@ -60,8 +60,27 @@
 				}
 			}catch (e: * )
 			{
-				trace("gamecore destory error:"+e.toString());
+				trace("selectcover remove child error:"+e.toString());
 			}
+			try{
+				while(thumbnails.length>0)
+				{
+					thumbnails.pop();
+				}
+			}catch (e: * )
+			{
+				trace("selectcover thumbnails error:"+e.toString());
+			}
+			try{
+				while(thumbs.length>0)
+				{
+					thumbs.pop();
+				}
+			}catch (e: * )
+			{
+				trace("selectcover thumbs error:"+e.toString());
+			}
+		
 		}
 
 
@@ -103,8 +122,8 @@
 			var xml1:XML=<BUTTON name="button_back">
 				<SHOW_LABLE>0</SHOW_LABLE><X>61</X><Y>489</Y>
 				<IMAGES>
-				<FILE>{myPath+"btn_image.png"}</FILE>
-				<FILE>{myPath+"btn_image.png"}</FILE>
+				<FILE>{myPath+"btn_image_small_square.png"}</FILE>
+				<FILE>{myPath+"btn_image_small_square.png"}</FILE>
 				</IMAGES>
 				<CAPTION>
 				<CHIT>undefined</CHIT>
@@ -113,15 +132,15 @@
 				<MESSAGE>0</MESSAGE>;
 				</BUTTON>;
 			
-			btn1 = new customButton(xml1,1);
+			var btn1:customButton = new customButton(xml1,1);
 			addChild(btn1);
 			btn1.addEventListener(MouseEvent.CLICK,onClick);
 				
 			var xml2:XML=<BUTTON name="button_next">
 				<SHOW_LABLE>0</SHOW_LABLE><X>588</X><Y>489</Y>
 				<IMAGES>
-				<FILE>{myPath+"btn_image.png"}</FILE>
-				<FILE>{myPath+"btn_image.png"}</FILE>
+				<FILE>{myPath+"btn_image_small_square.png"}</FILE>
+				<FILE>{myPath+"btn_image_small_square.png"}</FILE>
 				</IMAGES>
 				<CAPTION>
 				<CHIT>undefined</CHIT>
@@ -130,7 +149,7 @@
 				<MESSAGE>0</MESSAGE>;
 				</BUTTON>;
 			
-			btn2 = new customButton(xml2,1);
+			var btn2:customButton = new customButton(xml2,1);
 			addChild(btn2);
 			btn2.addEventListener(MouseEvent.CLICK, onClick);
 				

@@ -19,15 +19,15 @@
 		{
 			e.target.removeEventListener(Event.COMPLETE,onload);
 
-			loadedData = myLoader.data.split(/\r\n|\n|\r,/);
-			loadedData.pop();
-			for (var i:int = 0; i < loadedData.length; i++)
+			var temp:Array = myLoader.data.split(/\r\n|\n|\r,/);
+			temp.pop();
+			for (var i:int = 0; i < temp.length; i++)
 			{
-				var rowArray:Array = loadedData[i].split(",");
+				var rowArray:Array = temp[i].split(",");
 				loadedData[i] = {CLOTH:new SmoothingBitmapLoader(rowArray[0]),SHADOW:new SmoothingBitmapLoader(rowArray[1])};
-				
+				trace(rowArray[0] +" "+rowArray[1]);
 			}
-			loadedData.shift();
+			temp.shift();
 			
 			dispatchEvent(new Event(Event.COMPLETE));
 		}

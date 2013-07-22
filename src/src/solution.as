@@ -50,13 +50,28 @@
 
 		function createCategoryList()
 		{
-			var category:SmoothingBitmapLoader = new SmoothingBitmapLoader(getFullPath(loaderInfo) +"category.swf");
-			category.addEventListener(SmoothingBitmapLoader.INIT,function onLoaded(e:Event)
+			var categoryList:SmoothingBitmapLoader = new SmoothingBitmapLoader(getFullPath(loaderInfo) +"category.swf");
+			categoryList.addEventListener(SmoothingBitmapLoader.INIT,function onLoaded(e:Event)
 			{
-			category.removeEventListener(SmoothingBitmapLoader.INIT,onLoaded);
-			addChild(category);
+				categoryList.removeEventListener(SmoothingBitmapLoader.INIT,onLoaded);
+				addChild(categoryList);
 				
-			category.loaderContent.addEventListener(SongListEvent.SONG_CATEGORY,onCategoryList);
+				categoryList.loaderContent.addEventListener(SongListEvent.SONG_CATEGORY,function onCategoryList(e:SongListEvent)
+				{
+					categoryList.remove();
+					//Logger.debug("onCategoryList ",e.data);
+					//category.loaderContent.removeEventListener(SongListEvent.SONG_CATEGORY,onCategoryList);
+					//removeChild(e.target as SmoothingBitmapLoader);
+					while (numChildren>0)
+					{
+						removeChildAt(0);
+					}
+					createSongList(e.data);
+				
+				
+				
+				
+				});
 			});
 		}
 		function createSongList(category_csv:Object)
@@ -77,6 +92,7 @@
 				addChild(songlist);
 				songlist.loaderContent.addEventListener(MyEvent.GO_TO_PREVIOUS_PAGE,function gotoPreviousPage(e:Event)
 				{
+					songlist.remove();
 					while(numChildren>0)
 					{
 						removeChildAt(0);
@@ -86,21 +102,7 @@
 			});
 		}
 		
-		function onCategoryList(e:SongListEvent)
-		{
-			//Logger.debug("onCategoryList ",e.data);
-			//category.loaderContent.removeEventListener(SongListEvent.SONG_CATEGORY,onCategoryList);
-			//removeChild(e.target as SmoothingBitmapLoader);
-			while (numChildren>0)
-			{
-				removeChildAt(0);
-			}
-			createSongList(e.data);
 		
-		
-		
-		
-		}
 		function onSongList(e:SongListEvent)
 		{
 			//Logger.debug("onSongList ",e.data);
@@ -137,10 +139,7 @@
 			{
 				
 				Logger.debug(MySharedObjectConstant.getSongPath());
-				while(numChildren>0)
-				{
-					removeChildAt(0);
-				}
+				
 				/*dispatchEvent(new Event(MyEvent.GO_TO_NEXT_PAGE)); 
 				addEventListener(SongListEvent.SONG_CONFIRM,onSongConfirm);
 				dispatchEvent(new SongListEvent(SongListEvent.SONG_CONFIRM,_data)); */

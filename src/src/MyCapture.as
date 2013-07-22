@@ -54,7 +54,153 @@
 		var shadow:MovieClip = new MovieClip();
 		var modelData:ModelData;
 		var ranNumbers:Array;
-		var fishBMP:SmoothingBitmapLoader = new SmoothingBitmapLoader("./selectcover.swf");
+
+	override protected function destroy()
+		{
+			try{
+			counter1.remove();
+			counter1 = null;
+			counter2.remove();
+			counter2= null;
+			}
+			catch (e: * )
+			{
+				Logger.debug("modelData destory counter2 error:"+e.toString());
+				trace("modelData destory counter2 error:"+e.toString());
+			}
+			try{
+				shadow = null;
+				
+			}
+			catch (e: * )
+			{
+				Logger.debug("modelData destory shadow error:"+e.toString());
+				trace("modelData destory shadow error:"+e.toString());
+			}
+			try{
+			shutterSound = null;
+			shutterSoundChannel = null;
+			shutterSoundTransform = null;
+		
+			counterSound = null;
+			counterSoundChannel = null;
+			counterSoundTransform = null;
+				
+			}
+			catch (e: * )
+			{
+				Logger.debug("modelData destory sound effect error:"+e.toString());
+				trace("modelData destory sound effect error:"+e.toString());
+			}
+			while(ranNumbers.length>0)
+			{
+				ranNumbers.pop();
+			}
+			Logger.debug("MyCapture destroy");
+			
+			try{
+				blink.remove();
+				for (var i:int = 0; i < modelData.loadedData.length; i++)
+				{
+					
+					modelData.loadedData[i].CLOTH.remove();
+					modelData.loadedData[i].SHADOW.remove();
+					
+				}
+			}
+			catch (e: * )
+			{
+				Logger.debug("modelData destory modelData error:"+e.toString());
+				trace("modelData destory modelData error:"+e.toString());
+			}
+			
+			try{
+				
+				Timer1.removeEventListener(TimerEvent.TIMER, timerHandler);
+			}	
+			catch (e: * )
+			{
+				Logger.debug("gamecore destory Timer1 error:"+e.toString());
+				trace("gamecore destory Timer1 error:"+e.toString());
+			}
+
+			try{
+				Timer1.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler);
+			}
+			catch (e: * )
+			{
+				Logger.debug("gamecore destory Timer1 error:"+e.toString());
+				trace("gamecore destory Timer1 error:"+e.toString());
+			}
+			try{
+				Timer2.removeEventListener(TimerEvent.TIMER, timerHandler2);
+					}
+			catch (e: * )
+			{
+				Logger.debug("gamecore destory Timer1 error:"+e.toString());
+				trace("gamecore destory Timer1 error:"+e.toString());
+			}
+			try{
+				Timer2.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler2);
+			}
+			catch (e: * )
+			{
+				Logger.debug("gamecore destory Timer2 error:"+e.toString());
+				trace("gamecore destory Timer2 error:"+e.toString());
+			}
+			try{
+				while(savedBitmap.length>0)
+				{
+					
+					var bmd:BitmapData = savedBitmap.pop();
+					bmd.dispose();
+				}
+			}catch (e: * )
+			{
+				Logger.debug("gamecore destory bmd.dispose error:"+e.toString());
+				trace("gamecore destory bmd.dispose error:"+e.toString());
+			}
+			try{
+				
+				TweenMax.to(sc, delay, {volume:0, onComplete:function stopSound()
+					{
+						if(sc!=null)sc.stop();
+						snd = null ;
+						sc  =null ;
+						st = null ;
+						
+					});
+				
+			}catch (e: * )
+			{
+				Logger.debug("gamecore destory sc.stop error:"+e.toString());
+				trace("gamecore destory sc.stop error:"+e.toString());
+			}
+			finally
+			{
+				if(sc!=null)sc.stop();
+				snd = null ;
+				sc  =null ;
+				st = null ;
+			}
+			
+			try{
+				Logger.debug("gamecord : removeAll Child");
+				trace("gamecord : removeAll Child");
+				while(numChildren>0)
+				{
+					removeChildAt(0);
+				}
+			}catch (e: * )
+			{
+				trace("gamecore destory removeAll Child error:"+e.toString());
+
+			}
+			
+			super.destroy();
+		}
+		
+		var selectCover:SmoothingBitmapLoader = new SmoothingBitmapLoader("./selectcover.swf");
 		
 		public function MyCapture() {
 			// constructor code
@@ -66,7 +212,7 @@
 		override protected function init()
 		{
 			super.init();
-			Start();
+			
 			blink = new BitmapLoader("./flashing.swf");
 			/*blink.graphics.beginFill(0xFFFFFF,1.0);
 			blink.graphics.drawRect(0,0,720,1280);
@@ -80,21 +226,28 @@
 			}
 			else
 			{
-				MySharedObjectConstant.setCategory("POP");
+				MySharedObjectConstant.setCategory("ROCK");
 				modelData= new ModelData(getRootPath()+modelPath+MySharedObjectConstant.getCategory());
 			}
 			modelData.addEventListener(Event.COMPLETE,function onDataLoaded(e:Event)
 			{
 				modelData.removeEventListener(Event.COMPLETE, onDataLoaded);
 				
-				ranNumbers = [ uint (randomNumber(0,modelData.loadedData.length-1))];//
+				
 				/*,
 					uint (randomNumber(0,modelData.loadedData.length)),
 					uint (randomNumber(0,modelData.loadedData.length)),
 					uint (randomNumber(0,modelData.loadedData.length)),
 					uint (randomNumber(0,modelData.loadedData.length))];*/
 				//Logger.debug(ranNumbers);
+				ranNumbers  = new Array();
+				
+
+				if(modelData.loadedData.length>5)
+				{
+					
 				var newRand:uint = uint (randomNumber(0,modelData.loadedData.length-1));
+					ranNumbers.push(newRand);
 				while(ranNumbers.length<5)
 				{
 					var ret:Boolean = false;
@@ -113,9 +266,21 @@
 					}
 					if(ret)
 					{
+						Logger.debug("Random number push ",newRand);
+						trace("Random number push ",newRand);
 						ranNumbers.push(newRand);
 					}
 				}
+			}
+			else
+			{
+				
+				ranNumbers.push(0);
+				ranNumbers.push(1);
+				ranNumbers.push(2);
+				ranNumbers.push(3);
+				ranNumbers.push(4);
+			}
 				Logger.debug(ranNumbers);
 				
 				
@@ -156,6 +321,7 @@
 		}
 		override protected function onDraw()
 		{
+			
 			super.onDraw();
 		}
 		private function timerHandler(e:TimerEvent):void{
@@ -202,70 +368,7 @@
 			counterSoundTransform.volume = 0.5;
 			counterSoundChannel.soundTransform = counterSoundTransform;
 		}
-		override protected function destroy()
-		{
-			
-			try{
-				blink.remove();
-				for (var i:int = 0; i < modelData.loadedData.length; i++)
-				{
-					
-					modelData.loadedData[i].CLOTH.remove();
-					modelData.loadedData[i].SHADOW.remove();
-					
-				}
-			}
-			catch (e: * )
-			{
-				trace("modelData destory error:"+e.toString());
-			}
-			
-			try{
-				super.destroy();
-				Timer1.removeEventListener(TimerEvent.TIMER, timerHandler);
-				Timer1.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler);
-				Timer2.removeEventListener(TimerEvent.TIMER, timerHandler2);
-				Timer2.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler2);
-				while(savedBitmap.length>0)
-				{
-					
-					var bmd:BitmapData = savedBitmap.pop();
-					bmd.dispose();
-				}
-				
-				if(snd!=null)
-				{
-				/*	snd = new Sound  ;
-				sc = new SoundChannel  ;
-				st = new SoundTransform  ;*/
-					TweenMax.to(sc, delay, {volume:0, onComplete:function stopSound()
-									{
-										
-				
-										if(sc!=null)sc.stop();
-										
-									}});
-				}
-			}catch (e: * )
-			{
-				Logger.debug("gamecore destory error:"+e.toString());
-				trace("gamecore destory error:"+e.toString());
-			}
-			
-			try{
-				Logger.debug("gamecord : removeAll Child");
-				trace("gamecord : removeAll Child");
-				while(numChildren>0)
-				{
-					removeChildAt(0);
-				}
-			}catch (e: * )
-			{
-				trace("gamecore destory error:"+e.toString());
-			}
-			
-			
-		}
+		
 		private function completeHandler(e:TimerEvent):void {
 			initSound();
 			Timer1.removeEventListener(TimerEvent.TIMER, timerHandler);
@@ -281,6 +384,7 @@
 			addChild(counter2);
 			removeChild(counter1);
 			Logger.debug("completeHandler "+ repeat);
+			Start();
 		}
 		private function timerHandler2(e:TimerEvent):void{
 			repeat2--;
@@ -327,7 +431,8 @@
 				Timer2 = null;
 				Logger.debug("Time 2 Complete");
 
-				if (vid!=null && cam!=null )
+				Logger.debug("vid.attachCamera(null);");
+					if (vid!=null && cam!=null )
 				{
 					vid.attachCamera(null);
 				}
@@ -335,15 +440,15 @@
 				removeChild(shadow);
 
 				/**/
-				
+				Pause();
 				addEventListener(Event.ENTER_FRAME, function renderHandler(event:Event)
 				{
 					saveImages();
-					addChild(fishBMP);
+					addChild(selectCover);
 					
-					fishBMP.loaderContent.addEventListener(MySharedObjectConstant.UPLOAD_COMPLETE,function onUploadComplete(e:Event)
+					selectCover.loaderContent.addEventListener(MySharedObjectConstant.UPLOAD_COMPLETE,function onUploadComplete(e:Event)
 						{
-							fishBMP.loaderContent.removeEventListener(MySharedObjectConstant.UPLOAD_COMPLETE, onUploadComplete);
+							selectCover.loaderContent.removeEventListener(MySharedObjectConstant.UPLOAD_COMPLETE, onUploadComplete);
 							//dispatchEvent(new Event(PostToFacabook.UPLOAD_COMPLETE));
 							
 	
@@ -353,11 +458,12 @@
 								}});
 						});
 						
-					fishBMP.loaderContent.addEventListener(MyEvent.GO_TO_NEXT_PAGE,function onNext(e:Event)
+					selectCover.loaderContent.addEventListener(MyEvent.GO_TO_NEXT_PAGE,function onNext(e:Event)
 					{
-						fishBMP.loaderContent.removeEventListener(MyEvent.GO_TO_NEXT_PAGE, onNext);
+						selectCover.loaderContent.removeEventListener(MyEvent.GO_TO_NEXT_PAGE, onNext);
 						dispatchEvent(new Event(MyEvent.GO_TO_NEXT_PAGE));
-						removeChild(fishBMP);
+						removeChild(selectCover);
+						selectCover.remove();
 						destroy();
 					});
 
@@ -409,12 +515,12 @@
 			}
 			
 		}
-		override protected function onClick(e:MouseEvent)
+		/*override protected function onClick(e:MouseEvent)
 		{
 			
 			
 			saveImage();
-		}
+		}*/
 		function saveImage()
 		{
 			
@@ -451,12 +557,14 @@
 		}
 		function initShadow()
 		{
+			Logger.debug("modelData.loadedData.length "+modelData.loadedData+" index "+index + " ranNumbers[index]:" +ranNumbers[index]);
 			shadow.addChild(modelData.loadedData[ ranNumbers[index]].SHADOW);
 			shadow.scaleX = shadow.scaleY = SCALE;
 			shadow.x = -((shadow.width*0.5)-MIDX );
 			shadow.y = -((shadow.height*0.5)-MIDY );
 			TweenMax.to(shadow,5,{scaleX:1,scaleY:1,x:0,y:0});
 		}
+		
 	}
 
 }

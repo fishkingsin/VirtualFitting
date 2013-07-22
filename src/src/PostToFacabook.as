@@ -4,7 +4,7 @@
 				private static const myPath:String = "./data/images/"		protected static const APP_ID:String = "405938312786016";// Your App ID.		protected static const ALBUM_ID:String = "me";// Your App ID.		//protected static const ALBUM_ID:String = "229661030501037";// Your App ID.				protected static const APP_ORIGIN:String = "http://stormy-snow-6379.herokuapp.com/";// The site URL of your application (specified in your app settings); needed for clearing cookie when logging out.		var access_token:String;		var page_access_token;
 		var btn1:customButton = null;
 		var circle:SmoothingBitmapLoader;
-		var coverflow:SmoothingBitmapLoader;		public function PostToFacabook()		{
+		//var coverflow:SmoothingBitmapLoader;		public function PostToFacabook()		{
 			stop();			// constructor code			FacebookDesktop.init(APP_ID,handleInit);			
 			if(stage)
 			{
@@ -45,8 +45,8 @@
 		{
 			
 			
-			coverflow = new SmoothingBitmapLoader("coverflow.swf");
-			addChild(coverflow);
+			//coverflow = new SmoothingBitmapLoader("coverflow.swf");
+			//addChild(coverflow);
 			
 			button_login.addEventListener(MouseEvent.CLICK,function onLoginClick(e:MouseEvent){
 				
@@ -67,7 +67,7 @@
 			<CAPTION>
 				<CHI>undefined</CHI>
 			</CAPTION>
-			<NEXT_PAGE>index</NEXT_PAGE>
+			<NEXT_PAGE>landing</NEXT_PAGE>
 			<MESSAGE>B</MESSAGE>
 		</BUTTON>;
 			
@@ -117,8 +117,8 @@
 				circle.y = 640;				//processButtonAction(minterface.getButtonByName("btn_login") as customButton );			}			else if (fail)			{				if(fail=="user-canceled")
 				{
 					gotoAndStop(2);
-					coverflow.remove();
-					removeChild(coverflow);
+					//coverflow.remove();
+					//removeChild(coverflow);
 					addChild(btn1);
 					dispatchEvent(new Event(MySharedObjectConstant.UPLOAD_COMPLETE));
 					
@@ -127,7 +127,7 @@
 			var now:Date = new Date();
 			var timestamp:String = now.valueOf().toString();
 			var path:String = "/data/"+timestamp+".png"			params.fileName = timestamp;			params.image = file;			params.access_token = page_accesstoken;			FacebookDesktop.api('/'+album_id+'/photos',handleUploadComplete,params,'POST');		}		protected function handleUploadComplete(response:Object,fail:Object):void		{			var status = response ? 'Successfully uploaded':'Error uploading';			Logger.debug(status);			//Logger.debug(fail.toString());			logout( handleLogout);			gotoAndStop(2);
-			coverflow.remove();
-			removeChild(coverflow);
+			//coverflow.remove();
+			//removeChild(coverflow);
 			addChild(btn1);
 			dispatchEvent(new Event(MySharedObjectConstant.UPLOAD_COMPLETE));			removeChild(circle);		}		private function loadURL( url:String ):void		{			var loader:URLLoader = new URLLoader();			var request:URLRequest = new URLRequest(url);			//create any form vars to be posted to server side script			var form:URLVariables = new URLVariables();			form.postVar = "https://www.facebook.com/TsuenWanPlaza";			request.method = 'POST';			request.data = form;			//initialize data loader    			loader.dataFormat = "text";			loader.addEventListener(Event.COMPLETE, handleReturnResponse );			//request the document text			loader.load(request);		}		private function handleReturnResponse( event:Event ):void		{			Logger.debug( XML(event.target).toXMLString() );		}	}}

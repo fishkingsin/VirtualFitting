@@ -42,6 +42,21 @@
 			Logger.debug(TAG,"getSongName - "+mySo.data.songname);
 			return mySo.data.songname;
 		}
+		/*public static function setGender(gender:String)
+		{
+			var mySo = SharedObject.getLocal(KEY_HOST,"/");
+			
+			mySo.data.gender = gender;
+			
+			save("setGender", mySo);
+		}
+		public static function getGender():*
+		{
+			var mySo = SharedObject.getLocal(KEY_HOST,"/");
+			Logger.debug(TAG,"getGender - "+mySo.data.gender);
+			var ret:String = mySo.data.gender;
+			return (ret!=null)?ret:"male";
+		}*/
 		public static function setCoverPath(coverPath:String)
 		{
 			var mySo = SharedObject.getLocal(KEY_HOST,"/");

@@ -3,13 +3,20 @@
 		private function onRemoved(e:Event)
 		{
 			removeEventListener(Event.REMOVED_FROM_STAGE ,onRemoved);
-			for each (var s :BitmapLoader in sprites1)
+			while (sprites1.length>0)
 			{
+				var s : BitmapLoader = sprites1.pop();
 				s.remove();
+				s = null;
 			}
-			for each(var s2 :BitmapLoader in sprites2)
+			while (sprites2.length>0)
 			{
-				s2.remove();
+				var s : BitmapLoader = sprites2.pop();
+				s.remove();
+				s = null;
 			}
+			format1 = null;;
+			format2 = null;
+			
 			//remove();
 		}		//function highlight(b:Boolean):void		//{		//	if(b)		//	{		//		super.changeSprite(sprites2);		//	}		//	else		//	{		//		super.changeSprite(sprites1);		//	}		//}		//function changeString():void		//{		//	if (CommonProperties.LANGUAGE == CommonProperties.CHINESE_T)		//	{		//		//buttonBase.changeSprite(sprites1);		//		if (String(_xml.CAPTION.CHIT).length > 0)		//		{		//			super.changeText((_xml.SHOW_LABLE!=0)?_xml.CAPTION.CHIT:"",format1);		//		}		//		if (sprites1.length > 0)		//		{		//			super.changeSprite(sprites1);		//		}		//	}		//	else if (CommonProperties.LANGUAGE==CommonProperties.ENGLISH)		//	{		//		//buttonBase.changeSprite(sprites2);		//		if (String(_xml.CAPTION.ENG).length > 0)		//		{		//			super.changeText((_xml.SHOW_LABLE!=0)?_xml.CAPTION.ENG:"",format2);		//		}		//		if (sprites2.length > 0)		//		{		//			super.changeSprite(sprites2);		//		}		//	}		//}		function get caption():String		{			if (CommonProperties.LANGUAGE == CommonProperties.CHINESE_T)			{				return _xml.CAPTION.CHIT;			}			else if (CommonProperties.LANGUAGE==CommonProperties.ENGLISH)			{				return _xml.CAPTION.ENG;			}			return _xml.CAPTION.CHIT;		}		function get path():String		{			if (CommonProperties.LANGUAGE == CommonProperties.CHINESE_T)			{				return String(_xml.FILES.CHIT);			}			else if (CommonProperties.LANGUAGE==CommonProperties.ENGLISH)			{				return String(_xml.FILES.ENG);			}			return String(_xml.FILES.CHIT);		}		function get nextPage():String		{			return next_page;		}		function get xml():XML		{			return _xml;		}	}}
