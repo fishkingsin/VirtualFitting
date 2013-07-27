@@ -8,3 +8,22 @@
 
 20130712_materials/
 *.air
+
+*.m4a
+
+*.exe
+
+*.sh
+
+Virtualfitting_material/
+src/VF.fla
+
+src/VF-app.xml
+
+*.txt
+
+src/camera.fla
+
+src/src/Main 2.as
+
+src/empty.fla

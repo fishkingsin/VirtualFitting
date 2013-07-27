@@ -57,6 +57,8 @@
 
 	override protected function destroy()
 		{
+				
+			
 			try{
 			counter1.remove();
 			counter1 = null;
@@ -115,17 +117,10 @@
 			}
 			
 			try{
-				
+				Timer1.stop();
 				Timer1.removeEventListener(TimerEvent.TIMER, timerHandler);
-			}	
-			catch (e: * )
-			{
-				Logger.debug("gamecore destory Timer1 error:"+e.toString());
-				trace("gamecore destory Timer1 error:"+e.toString());
-			}
-
-			try{
 				Timer1.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler);
+				Timer1 = null;
 			}
 			catch (e: * )
 			{
@@ -133,15 +128,10 @@
 				trace("gamecore destory Timer1 error:"+e.toString());
 			}
 			try{
+				Timer2.stop(); 
 				Timer2.removeEventListener(TimerEvent.TIMER, timerHandler2);
-					}
-			catch (e: * )
-			{
-				Logger.debug("gamecore destory Timer1 error:"+e.toString());
-				trace("gamecore destory Timer1 error:"+e.toString());
-			}
-			try{
 				Timer2.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler2);
+				Timer2 = null;
 			}
 			catch (e: * )
 			{
@@ -169,7 +159,7 @@
 						sc  =null ;
 						st = null ;
 						
-					});
+					}});
 				
 			}catch (e: * )
 			{
@@ -373,7 +363,7 @@
 			initSound();
 			Timer1.removeEventListener(TimerEvent.TIMER, timerHandler);
 			Timer1.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler);
-			Timer1 = null;
+			
 			repeat2 = 11;
 			repeat = 5;
 			Timer2.start(); 
@@ -428,7 +418,7 @@
 				//sc.stop();
 				Timer2.removeEventListener(TimerEvent.TIMER, timerHandler2);
 				Timer2.removeEventListener(TimerEvent.TIMER_COMPLETE, completeHandler2);
-				Timer2 = null;
+				
 				Logger.debug("Time 2 Complete");
 
 				Logger.debug("vid.attachCamera(null);");
